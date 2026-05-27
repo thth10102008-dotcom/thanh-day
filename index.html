@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>THANH ĐÂY</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#0f0f0f;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+}
+
+.container{
+    width:90%;
+    max-width:400px;
+    background:#171717;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 0 20px #7c4dff;
+}
+
+h1{
+    font-size:35px;
+    margin-bottom:15px;
+    color:#9c6bff;
+}
+
+p{
+    margin-bottom:20px;
+    color:#ccc;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(45deg,#7c4dff,#00d4ff);
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.03);
+}
+
+.loading{
+    width:100%;
+    height:10px;
+    background:#333;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:20px;
+    display:none;
+}
+
+.bar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(45deg,#7c4dff,#00d4ff);
+}
+
+#final{
+    display:none;
+    margin-top:20px;
+}
+
+a{
+    color:#00d4ff;
+    word-break:break-all;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>THANH ĐÂY</h1>
+
+<p id="text">
+Nhấn bắt đầu để vượt checkpoint
+</p>
+
+<button onclick="startStep()">
+BẮT ĐẦU
+</button>
+
+<div class="loading">
+    <div class="bar"></div>
+</div>
+
+<div id="final">
+    <h2>HOÀN THÀNH 🎉</h2>
+    <br>
+    <p>Link nhận thưởng:</p>
+
+    <a href="https://your-link.com" target="_blank">
+        https://your-link.com
+    </a>
+</div>
+
+</div>
+
+<script>
+
+let step = 0;
+
+const links = [
+    "https://link4sub.com/24GwwPX8p7",
+    "https://link-b2.com",
+    "https://link-b3.com"
+];
+
+function startStep(){
+
+    if(step >= links.length){
+        document.querySelector("button").style.display="none";
+        document.querySelector(".loading").style.display="none";
+        document.getElementById("text").innerHTML="Bạn đã vượt hết checkpoint";
+        document.getElementById("final").style.display="block";
+        return;
+    }
+
+    document.querySelector(".loading").style.display="block";
+
+    let width = 0;
+
+    const bar = document.querySelector(".bar");
+
+    const interval = setInterval(()=>{
+
+        width++;
+
+        bar.style.width = width + "%";
+
+        if(width >= 100){
+
+            clearInterval(interval);
+
+            window.open(links[step], "_blank");
+
+            step++;
+
+            bar.style.width = "0%";
+
+            if(step < links.length){
+
+                document.getElementById("text").innerHTML =
+                "Đã hoàn thành bước " + step + " / " + links.length;
+
+            }else{
+
+                document.querySelector("button").innerHTML =
+                "NHẬN THƯỞNG";
+
+                document.getElementById("text").innerHTML =
+                "Đã hoàn thành tất cả checkpoint";
+            }
+        }
+
+    },30);
+
+}
+
+</script>
+
+</body>
+</html>
