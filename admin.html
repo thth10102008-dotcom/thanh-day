@@ -29,6 +29,7 @@ body{
     background:#171717;
     padding:30px;
     border-radius:20px;
+    box-shadow:0 0 20px #7c4dff;
 }
 
 h1{
@@ -45,6 +46,7 @@ input{
     border-radius:10px;
     background:#222;
     color:white;
+    outline:none;
 }
 
 button{
@@ -54,7 +56,12 @@ button{
     border-radius:10px;
     background:linear-gradient(45deg,#7c4dff,#00d4ff);
     color:white;
+    font-size:16px;
     cursor:pointer;
+}
+
+button:hover{
+    opacity:0.9;
 }
 
 #panel{
@@ -72,7 +79,7 @@ button{
 
 <h1>ADMIN LOGIN</h1>
 
-<input type="password" id="pass" placeholder="Mật khẩu">
+<input type="password" id="password" placeholder="Nhập mật khẩu">
 
 <button onclick="login()">
 ĐĂNG NHẬP
@@ -84,11 +91,11 @@ button{
 
 <h1>QUẢN LÝ LINK</h1>
 
-<input type="text" id="b1" placeholder="Link bước 1">
+<input type="text" id="link1" placeholder="Link bước 1">
 
-<input type="text" id="b2" placeholder="Link bước 2">
+<input type="text" id="link2" placeholder="Link bước 2">
 
-<input type="text" id="b3" placeholder="Link bước 3">
+<input type="text" id="link3" placeholder="Link bước 3">
 
 <input type="text" id="reward" placeholder="Link phần thưởng">
 
@@ -119,24 +126,24 @@ if(!data){
         reward:"https://google.com"
     };
 
-    localStorage.setItem("thanhday",JSON.stringify(data));
+    localStorage.setItem("thanhday", JSON.stringify(data));
 }
 
 function login(){
 
-    let pass = document.getElementById("pass").value;
+    let pass = document.getElementById("password").value;
 
-    if(pass == data.password){
+    if(pass === data.password){
 
-        document.getElementById("login").style.display="none";
+        document.getElementById("login").style.display = "none";
 
-        document.getElementById("panel").style.display="block";
+        document.getElementById("panel").style.display = "block";
 
-        document.getElementById("b1").value = data.links[0];
+        document.getElementById("link1").value = data.links[0];
 
-        document.getElementById("b2").value = data.links[1];
+        document.getElementById("link2").value = data.links[1];
 
-        document.getElementById("b3").value = data.links[2];
+        document.getElementById("link3").value = data.links[2];
 
         document.getElementById("reward").value = data.reward;
 
@@ -148,136 +155,17 @@ function login(){
 
 function saveData(){
 
-    data.links[0] = document.getElementById("b1").value;
+    data.links[0] = document.getElementById("link1").value;
 
-    data.links[1] = document.getElementById("b2").value;
+    data.links[1] = document.getElementById("link2").value;
 
-    data.links[2] = document.getElementById("b3").value;
-
-    data.reward = document.getElementById("reward").value;
-
-    localStorage.setItem("thanhday",JSON.stringify(data));
-
-    alert("Đã lưu thành công");
-}
-
-</script>
-
-</body>
-</html>
-h1{
-    text-align:center;
-    margin-bottom:20px;
-    color:#9c6bff;
-}
-
-input{
-    width:100%;
-    padding:14px;
-    margin-bottom:15px;
-    border:none;
-    border-radius:10px;
-    background:#222;
-    color:white;
-}
-
-button{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:10px;
-    background:linear-gradient(45deg,#7c4dff,#00d4ff);
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-}
-
-#panel{
-    display:none;
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="box">
-
-<div id="login">
-
-<h1>ADMIN LOGIN</h1>
-
-<input type="password" id="pass" placeholder="Nhập mật khẩu">
-
-<button onclick="login()">
-ĐĂNG NHẬP
-</button>
-
-</div>
-
-<div id="panel">
-
-<h1>QUẢN LÝ LINK</h1>
-
-<input type="text" id="b1" placeholder="Link bước 1">
-
-<input type="text" id="b2" placeholder="Link bước 2">
-
-<input type="text" id="b3" placeholder="Link bước 3">
-
-<input type="text" id="reward" placeholder="Link phần thưởng">
-
-<button onclick="saveLinks()">
-LƯU THAY ĐỔI
-</button>
-
-</div>
-
-</div>
-
-<script>
-
-let data = JSON.parse(localStorage.getItem("thanhday"));
-
-function login(){
-
-    let pass = document.getElementById("pass").value;
-
-    if(pass == data.password){
-
-        document.getElementById("login").style.display = "none";
-
-        document.getElementById("panel").style.display = "block";
-
-        document.getElementById("b1").value = data.links[0];
-
-        document.getElementById("b2").value = data.links[1];
-
-        document.getElementById("b3").value = data.links[2];
-
-        document.getElementById("reward").value = data.reward;
-
-    }else{
-
-        alert("Sai mật khẩu");
-    }
-
-}
-
-function saveLinks(){
-
-    data.links[0] = document.getElementById("b1").value;
-
-    data.links[1] = document.getElementById("b2").value;
-
-    data.links[2] = document.getElementById("b3").value;
+    data.links[2] = document.getElementById("link3").value;
 
     data.reward = document.getElementById("reward").value;
 
     localStorage.setItem("thanhday", JSON.stringify(data));
 
     alert("Đã lưu thành công");
-
 }
 
 </script>
